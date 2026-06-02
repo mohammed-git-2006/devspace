@@ -9,9 +9,19 @@ import JSONPrettify from "./tools/JSONPrettify";
 import JSONMinify from "./tools/JSONMinify";
 import JWT from "./tools/JWT";
 import HashPage from "./tools/Hash";
+import Footer from "./components/Footer";
+import Base64 from "./tools/Base64";
+import RegexTester from "./tools/RegexTester";
+import URL from "./tools/URL";
+import TextCaseConverter from "./tools/TextCaseConverter";
+import WordCounter from "./tools/WordCounter";
+import HTTPTester from "./tools/HTTPTester";
+import ColorUtils from "./tools/ColorUtils";
+import DiffChecker from "./tools/DiffChecker";
+import PixelBlast from "../bits/PixelBlast";
 
 const tools = [
-  { name: 'JWT Decoder', url: '/tools/jwt' },
+  { name: 'JWT Decoder' , url: '/tools/jwt' },
   { name: 'JSON Prettify', url: '/tools/json-prettify' },
   { name: 'JSON Minify', url: '/tools/json-minify' },
   { name: 'Hash Generator (MD5/SHA256)', url: '/tools/hash' },
@@ -20,9 +30,9 @@ const tools = [
   { name: 'URL Encoder/Decoder', url: '/tools/url' },
   { name: 'Text Case Converter', url: '/tools/text-case' },
   { name: 'Word Counter', url: '/tools/word-counter' },
-  { name: 'Image Resizer', url: '/tools/image-resizer' },
-  { name: 'PDF Merger', url: '/tools/pdf-merge' },
-  { name: 'PDF Compressor', url: '/tools/pdf-compress' }
+  { name: 'HTTP'},
+  { name: 'Color Utils'},
+  { name: 'Diff Checker'}
 ];
 
 const shortcuts = {
@@ -35,9 +45,9 @@ const shortcuts = {
   'ue' : 'URL Encoder/Decoder',
   'tc' : 'Text Case Converter',
   'wc' : 'Word Counter',
-  'ir' : 'Image Resizer',
-  'pm' : 'PDF Merger',
-  'pc' : 'PDF Compressor'
+  'ht' : 'HTTP', // A Postmail like mini version,
+  'cu' : 'Color Utils',
+  'dc' : 'Diff Checker',
 }
 
 
@@ -72,12 +82,12 @@ function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} :
 
   return (
     <div 
-    className="px-6 py-4 flex flex-row gap-4 gap-x-6 items-center mx-5 mt-5 backdrop-blur-2xl
-      rounded-2xl bg-gradient-to-r from-white/15 to-white/10 border border-white/20 shadow-2xl sticky top-5 left-0 z-[1500]
+    className="px-4 py-2.5 flex flex-row gap-3 gap-x-4 items-center mx-4 mt-4 backdrop-blur-2xl
+      rounded-xl bg-gradient-to-r from-white/10 to-white/5 border border-white/15 shadow-lg sticky top-4 left-0 z-[1500]
       "
     >
 
-      <div className="text-white font-bold text-xl border-r-[4px] flex items-center border-[var(--accent)] pr-3 h-10 w-[300px]">
+      <div className="text-white font-bold text-lg border-r-[3px] flex items-center border-[var(--accent)] pr-2.5 h-8 w-40 flex-shrink-0">
         <TextType 
           text={["DevSpace.com", "Cosmic Tools", "Code Galaxy"]}
           typingSpeed={75}
@@ -91,7 +101,7 @@ function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} :
       variants={containerVariants}
       initial='hidden'
       animate='enter'
-      className="flex flex-row flex-wrap gap-3 gap-y-2 items-center *:cursor-pointer *:transition">
+      className="flex-1 scrollbar-hide flex flex-wrap gap-2.5 gap-y-1 items-center justify-center *:cursor-pointer *:transition text-sm ">
         {tools.map((e, i) => {
           return <><motion.li
             variants={childVariants}
@@ -101,52 +111,49 @@ function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} :
               onToolSelected(e.name)
             }}
 
-            className={e.name == selectedTool ? "border-b-[3px] border-[var(--accent)] text-[var(--accent)] uppercase tracking-wide" : 
-              "uppercase tracking-wide border-b-[3px] border-transparent hover:border-[var(--accent)] hover:text-[var(--accent)]"}
+            className={e.name == selectedTool ? "border-b-[2px] border-[var(--accent)] text-[var(--accent)] uppercase tracking-wide whitespace-nowrap text-xs" : 
+              "uppercase tracking-wide border-b-[2px] border-transparent hover:border-[var(--accent)] hover:text-[var(--accent)] whitespace-nowrap text-xs"}
             >
               {e.name}
           </motion.li>
-          {i-1 != tools.length && <span className="text-[var(--accent)]">•</span>}
+          {i-1 != tools.length && <span className="text-[var(--accent)] text-opacity-50">•</span>}
           </>
         })
       }
       </motion.ul>
-      <div className="flex flex-col gap-2 text-xs">
-        <div>
-          <label className="inline-flex items-center cursor-pointer ">
-            <input type="checkbox" className="peer hidden"
-            onChange={() => {
-              onAnimatedChange(!checked)
-              setChecked(!checked)
-              // alert(e.target.value)
-            }} checked={checked}
-            />
-            <span className="w-5 h-5 border-2 border-gray-400 rounded-md flex items-center justify-center
-                        peer-checked:bg-[var(--accent)] peer-checked:border-[var(--accent)]
-                        transition-colors duration-200">
-              <svg className="hidden peer-checked:block w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-                <path d="M5 13l4 4L19 7" />
-              </svg>
-            </span>
-            <span className="ml-2 text-sm tl">Animated</span>
-          </label>
-
-        </div>
+      <div className="flex flex-row gap-3 text-xs ml-auto items-center flex-shrink-0">
+        <label className="inline-flex items-center cursor-pointer ">
+          <input type="checkbox" className="peer hidden"
+          onChange={() => {
+            onAnimatedChange(!checked)
+            setChecked(!checked)
+            // alert(e.target.value)
+          }} checked={checked}
+          />
+          <span className="w-4 h-4 border-2 border-gray-400 rounded-sm flex items-center justify-center
+                      peer-checked:bg-[var(--accent)] peer-checked:border-[var(--accent)]
+                      transition-colors duration-200">
+            <svg className="hidden peer-checked:block w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+              <path d="M5 13l4 4L19 7" />
+            </svg>
+          </span>
+          <span className="ml-1.5 text-xs tl whitespace-nowrap">Animated</span>
+        </label>
 
         <button
         onClick={() => {
           setShortcutsToggled(!shortcutsToggled)
         }} 
-        className="relative text-sm underline cursor-pointer td">
+        className="relative text-xs underline cursor-pointer td whitespace-nowrap hover:text-[var(--accent)] transition">
           Shortcuts?
-          {shortcutsToggled && <div className="transition fixed z-999 top-[80px] right-[20px] bg-black/80 p-3">
-            Shortcuts:
-            <div className="w-full flex flex-col gap-2 items-start mt-3">
+          {shortcutsToggled && <div className="transition fixed z-999 top-[70px] right-[20px] bg-black/90 p-2.5 rounded-lg border border-white/10">
+            <span className="text-xs font-semibold block mb-2">Shortcuts:</span>
+            <div className="w-full flex flex-col gap-1.5 items-start">
               {Object.entries(shortcuts).map(e => {
-                return <div className="flex flex-row gap-3">
+                return <div className="flex flex-row gap-2.5" key={e[0]}>
                   <div className="bg-white/80 text-black font-bold text-xs rounded-sm shadow-sm
-                  shadow-gray-300 p-1">{e[0]}</div>
-                  <div>{e[1]}</div>
+                  shadow-gray-300 px-1.5 py-0.5">{e[0]}</div>
+                  <div className="text-xs text-gray-300">{e[1]}</div>
                 </div>
               })}
             </div>
@@ -191,22 +198,25 @@ export default function HomePage()
   return (
     <>
     <div className="fixed top-0 left-0 w-full h-full pointer-events-">
-      { bgAnimated ? <ColorBends
-        colors={["#6A0DAD", "#8a5cff", "#8a5cff"]}
-        rotation={90}
-        speed={0.2}
-        scale={1}
-        frequency={1}
-        warpStrength={1.025}
-        mouseInfluence={1}
-        noise={0.25}
-        parallax={0.5}
-        iterations={1}
-        intensity={1.5}
-        bandWidth={10}
-        transparent
-        autoRotate={0}
-      /> : 
+      { bgAnimated ? <PixelBlast
+    variant="square"
+    pixelSize={4}
+    color="#9D4EDD"
+    patternScale={2}
+    patternDensity={1}
+    pixelSizeJitter={0}
+    enableRipples
+    rippleSpeed={0.4}
+    rippleThickness={0.12}
+    rippleIntensityScale={1.5}
+    liquid={false}
+    liquidStrength={0.12}
+    liquidRadius={1.2}
+    liquidWobbleSpeed={5}
+    speed={0.5}
+    edgeFade={0.25}
+    transparent
+  /> : 
       <div className="bg-black/60 ">
 
       </div> }
@@ -239,12 +249,25 @@ export default function HomePage()
             {tool == 'JSON Minify' && <JSONMinify/> }
             {tool == 'JWT Decoder' && <JWT/> }
             {tool == 'Hash Generator (MD5/SHA256)' && <HashPage/>}
+            {tool == 'Base64 Encode/Decode' && <Base64/>}
+            {tool == 'Regex Tester' && <RegexTester/>}
+            {tool == 'URL Encoder/Decoder' && <URL/>}
+            {tool == 'Text Case Converter' && <TextCaseConverter/>}
+            {tool == 'Word Counter' && <WordCounter/>}
+            {tool == 'HTTP' && <HTTPTester/>}
+            {tool == 'Color Utils' && <ColorUtils/> }
+            {tool == 'Diff Checker' && <DiffChecker/> }
+            {/**
+             * { name: 'Color Utils'},
+                { name: 'Diff Checker'}
+             */}
             
           </PanelWrapper>
         </>}
 
       </div>
     </div>
+    {/* <Footer/> */}
     </>
   )
 }

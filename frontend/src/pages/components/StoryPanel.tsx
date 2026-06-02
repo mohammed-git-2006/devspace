@@ -9,7 +9,7 @@ function W({children} : {children:any}) {
 export default function StoryPanel() 
 {
   return <PanelWrapper title="🚀 The DevSpace Tale">
-    <div>
+    <div className="text-sm leading-relaxed">
       DevSpace.com wasn’t built by a famous coder…
       but by an <W>*unknown medicine student*</W> 🩺 who got tired of memorizing bones
       and decided to launch developer tools into orbit instead 🌌.

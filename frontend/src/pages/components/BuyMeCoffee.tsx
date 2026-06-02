@@ -4,8 +4,8 @@ import ButtonImage from '../../bmc.png'
 export default function BuyMeCoffe()
 {
   return <PanelWrapper title="☕🚀 Support DevSpace" hMax>
-    <div className="flex flex-col gap-2 h-full">
-      <p className="leading-relaxed flex-1">
+    <div className="flex flex-col gap-2 h-full text-sm">
+      <p className="leading-relaxed flex-1 ">
         Hey there, cosmic traveler 🌌✨ — keeping this toolbox orbiting smoothly takes fuel!
         If you’ve found it useful, consider <span className="text-[var(--accent)] font-semibold">buying me a coffee ☕</span>
         (or maybe a rocket snack 🍪) to keep the engines humming.
@@ -23,7 +23,7 @@ export default function BuyMeCoffe()
 
       <a href="https://ko-fi.com/devspace" 
       className="animate-bounce" 
-      target="_blank" rel="noopener noreferrer"><img src={ButtonImage} className="w bg-transparent h-[50px] w-min"/> </a>
+      target="_blank" rel="noopener noreferrer"><img src={ButtonImage} className="w bg-transparent h-[40px] w-min"/> </a>
 
     </div>
   </PanelWrapper>

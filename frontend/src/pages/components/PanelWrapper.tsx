@@ -31,6 +31,10 @@ export default function PanelWrapper({children, title, wMin, hMax, wMax} :
       </motion.span>}
     {children??<></>}
   </div>
+
+  return <div>
+    {children}
+  </div>
 }
 
 

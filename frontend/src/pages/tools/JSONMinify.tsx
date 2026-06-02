@@ -155,8 +155,8 @@ export default function JSONMinify()
           setJsonInput('')
         }}>Delete</li>
       </ul>
-      <textarea className="bg-black/80 rounded-lg border-2 border-white/20 w-full min-h-[500px]
-      td p-2 focus:outline-none" placeholder="Input text here ..."
+      <textarea className="bg-black/80 rounded-lg border-2 border-white/20 w-full min-h-[300px]
+      td p-2 focus:outline-none text-sm" placeholder="Input text here ..."
       value={jsonInput}
       onChange={(e) => {
         setJsonInput(e.target.value)
