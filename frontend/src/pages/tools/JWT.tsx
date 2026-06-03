@@ -66,7 +66,7 @@ export default function JWT()
       verifyJWT(token, secret).then(r => {
         setVerification(r)
         setVERR('')
-      }).catch(err => {
+      }).catch(_ => {
         setVERR('VALIDATION_ERROR')
       })
 

@@ -6,7 +6,7 @@ interface SnackBarInterface
   type: 'success'|'warning'|'error'
 }
 
-export default function SnackBar({msg, type='success'} : SnackBarInterface)
+export default function SnackBar({msg} : SnackBarInterface)
 {
 
 
