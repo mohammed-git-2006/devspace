@@ -5,7 +5,7 @@ import BuyMeCoffe from "./components/BuyMeCoffee";
 import TextType from "../bits/TextType";
 import StoryPanel from "./components/StoryPanel";
 import PixelBlast from "../bits/PixelBlast";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import tools from './tools/identifier.tsx'
 
 const shortcuts = {
@@ -25,7 +25,7 @@ const shortcuts = {
 }
 
 
-function NavBar({selectedTool, onAnimatedChange, animated} : 
+function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} : 
   {onToolSelected : (name:string) => void, selectedTool: string, onAnimatedChange : (v:boolean) => void,
     animated: boolean
   })
@@ -55,6 +55,12 @@ function NavBar({selectedTool, onAnimatedChange, animated} :
   const [checked, setChecked] = useState(animated)
 
   const nav = useNavigate();
+  const location = useLocation()
+
+  useEffect(() => {
+    if (selectedTool == 'none')
+      onToolSelected((tools.find(t => t.url == location.pathname)??{name:'none'}).name)
+  }, [])
 
   return (
     <div 
@@ -85,7 +91,7 @@ function NavBar({selectedTool, onAnimatedChange, animated} :
             onClick={() => {
               // nav(e.url)
               nav(e.url)
-              // onToolSelected(e.name)
+              onToolSelected(e.name)
             }}
 
             className={e.name == selectedTool ? "border-b-[2px] border-[var(--accent)] text-[var(--accent)] uppercase tracking-wide whitespace-nowrap text-xs" : 
