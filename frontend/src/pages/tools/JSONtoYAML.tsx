@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import YAML from 'yaml'
-import { atomDark, vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { vsDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 export default function JsonToYaml()
 {

@@ -1,35 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import CryptoJS from "crypto-js";
 
-function hashMD5(message:string) {
-  return CryptoJS.MD5(message).toString();
-}
-
-// Usage:
-// → "5d41402abc4b2a76b9719d911017c592"
-
-
-function hashSHA256(message:string) {
-  // const encoder = new TextEncoder();
-  // const data = encoder.encode(message);
-
-  // const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  // const hashArray = Array.from(new Uint8Array(hashBuffer));
-  // return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
-
-  return CryptoJS.SHA256(message).toString()
-}
-
-CryptoJS.SHA1
-CryptoJS.SHA224
-CryptoJS.SHA384
-CryptoJS.SHA512
-
-// Usage:
-// hashSHA256("hello").then(console.log); 
-// → "2cf24dba5fb0a30e26e83b2ac5b9e29e..."
-
-
 export default function HashPage()
 {
   const algosAvailable = useRef(

@@ -6,7 +6,6 @@ import TextType from "../bits/TextType";
 import StoryPanel from "./components/StoryPanel";
 import PixelBlast from "../bits/PixelBlast";
 import { Outlet, useNavigate } from "react-router-dom";
-import { nav } from "framer-motion/client";
 import tools from './tools/identifier.tsx'
 
 const shortcuts = {
@@ -26,7 +25,7 @@ const shortcuts = {
 }
 
 
-function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} : 
+function NavBar({selectedTool, onAnimatedChange, animated} : 
   {onToolSelected : (name:string) => void, selectedTool: string, onAnimatedChange : (v:boolean) => void,
     animated: boolean
   })
