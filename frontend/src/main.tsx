@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
+import { BrowserRouter, Link, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import HomePage from './pages/Home.tsx'
 import './App.css'
@@ -44,7 +44,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage/>}>
-          <Route index element={<div>Hello this is DevSpace.com</div>}/>
+          <Route index element={<div></div>}/>
           <Route path="tools/jwt"           element={<ToolPage><JWT /></ToolPage>} />
           <Route path="tools/json-prettify" element={<ToolPage><JSONPrettify /></ToolPage>} />
           <Route path="tools/json-minify"   element={<ToolPage><JSONMinify /></ToolPage>} />
@@ -59,6 +59,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="tools/color-utils"   element={<ToolPage><ColorUtils /></ToolPage>} />
           <Route path="tools/diff-checker"  element={<ToolPage><DiffChecker /></ToolPage>} />
         </Route>
+        <Route path='*' element={<Navigate to={'/'} replace/>}/>
       </Routes>
     </BrowserRouter>
   </MotionConfig>,
