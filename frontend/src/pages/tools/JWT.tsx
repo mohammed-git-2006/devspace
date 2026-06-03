@@ -11,12 +11,10 @@ function decodeJWT(token:string) {
   };
 }
 
-// Example: HMAC SHA-256 in browser
 async function verifyJWT(token:string, secret:string) {
   const [headerB64, payloadB64, signatureB64] = token.split('.');
   const signingInput = `${headerB64}.${payloadB64}`;
 
-  // Convert secret to CryptoKey
   const enc = new TextEncoder();
   const key = await crypto.subtle.importKey(
     "raw",
