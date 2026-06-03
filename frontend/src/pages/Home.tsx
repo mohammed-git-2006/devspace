@@ -1,45 +1,20 @@
 import { motion } from "framer-motion";
-import ColorBends from '../bits/ColorBend'
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import PanelWrapper from "./components/PanelWrapper";
 import BuyMeCoffe from "./components/BuyMeCoffee";
 import TextType from "../bits/TextType";
 import StoryPanel from "./components/StoryPanel";
-import JSONPrettify from "./tools/JSONPrettify";
-import JSONMinify from "./tools/JSONMinify";
-import JWT from "./tools/JWT";
-import HashPage from "./tools/Hash";
-import Footer from "./components/Footer";
-import Base64 from "./tools/Base64";
-import RegexTester from "./tools/RegexTester";
-import URL from "./tools/URL";
-import TextCaseConverter from "./tools/TextCaseConverter";
-import WordCounter from "./tools/WordCounter";
-import HTTPTester from "./tools/HTTPTester";
-import ColorUtils from "./tools/ColorUtils";
-import DiffChecker from "./tools/DiffChecker";
 import PixelBlast from "../bits/PixelBlast";
-
-const tools = [
-  { name: 'JWT Decoder' , url: '/tools/jwt' },
-  { name: 'JSON Prettify', url: '/tools/json-prettify' },
-  { name: 'JSON Minify', url: '/tools/json-minify' },
-  { name: 'Hash Generator (MD5/SHA256)', url: '/tools/hash' },
-  { name: 'Base64 Encode/Decode', url: '/tools/base64' },
-  { name: 'Regex Tester', url: '/tools/regex' },
-  { name: 'URL Encoder/Decoder', url: '/tools/url' },
-  { name: 'Text Case Converter', url: '/tools/text-case' },
-  { name: 'Word Counter', url: '/tools/word-counter' },
-  { name: 'HTTP'},
-  { name: 'Color Utils'},
-  { name: 'Diff Checker'}
-];
+import { Outlet, useNavigate } from "react-router-dom";
+import { nav } from "framer-motion/client";
+import tools from './tools/identifier.tsx'
 
 const shortcuts = {
+  'jd' : 'JWT Decoder',
   'jm' : 'JSON Minify',
   'jp' : 'JSON Prettify',
+  'jy' : 'JSON/YAML Converter',
   'hg' : 'Hash Generator (MD5/SHA256)',
-  'jd' : 'JWT Decoder',
   'bs' : 'Base64 Encode/Decode',
   'rt' : 'Regex Tester',
   'ue' : 'URL Encoder/Decoder',
@@ -80,6 +55,8 @@ function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} :
   const [shortcutsToggled, setShortcutsToggled] = useState(false)
   const [checked, setChecked] = useState(animated)
 
+  const nav = useNavigate();
+
   return (
     <div 
     className="px-4 py-2.5 flex flex-row gap-3 gap-x-4 items-center mx-4 mt-4 backdrop-blur-2xl
@@ -108,7 +85,9 @@ function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} :
             key={'tool-l-' + i}
             onClick={() => {
               // nav(e.url)
-              onToolSelected(e.name)
+              alert('Going to ...')
+              nav(e.url)
+              // onToolSelected(e.name)
             }}
 
             className={e.name == selectedTool ? "border-b-[2px] border-[var(--accent)] text-[var(--accent)] uppercase tracking-wide whitespace-nowrap text-xs" : 
@@ -172,12 +151,13 @@ export default function HomePage()
   const [_, setPrevChar] = useState('')
 
   const [bgAnimated, setBGAnimated] = useState(true)
+  const nav = useNavigate()
 
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
       const key = e.key.toLowerCase()
-      const tag = e.target.tagName.toLowerCase();
-      const isTyping = tag === "input" || tag === "textarea" || e.target.isContentEditable;
+      const tag = (e.target as any).tagName.toLowerCase();
+      const isTyping = tag === "input" || tag === "textarea" || (e.target as any).isContentEditable;
 
       if (isTyping) return; // skip if user is typing in a field
 
@@ -187,7 +167,11 @@ export default function HomePage()
         console.log(`Combo: ${combo}:[${prev} - ${key}]`)
 
         if (Object.keys(shortcuts).includes(combo))
-          setTool(shortcuts[combo]!)
+        {
+          setTool((shortcuts as any)[combo]!)
+          nav(tools.find(e => e.name == ((shortcuts as any)[combo]) as any)!.url)
+
+        }
 
         return key
 
@@ -243,11 +227,14 @@ export default function HomePage()
           </PanelWrapper>
         </>}
 
-        {tool != 'none' && <>
+        <Outlet />
+
+        {/* {tool != 'none' && <>
           <PanelWrapper wMax>
             {tool == 'JSON Prettify' && <JSONPrettify/> }
             {tool == 'JSON Minify' && <JSONMinify/> }
             {tool == 'JWT Decoder' && <JWT/> }
+            {tool == 'JSON/YAML Converter' && <JsonToYaml/> }
             {tool == 'Hash Generator (MD5/SHA256)' && <HashPage/>}
             {tool == 'Base64 Encode/Decode' && <Base64/>}
             {tool == 'Regex Tester' && <RegexTester/>}
@@ -257,13 +244,9 @@ export default function HomePage()
             {tool == 'HTTP' && <HTTPTester/>}
             {tool == 'Color Utils' && <ColorUtils/> }
             {tool == 'Diff Checker' && <DiffChecker/> }
-            {/**
-             * { name: 'Color Utils'},
-                { name: 'Diff Checker'}
-             */}
             
           </PanelWrapper>
-        </>}
+        </>} */}
 
       </div>
     </div>
