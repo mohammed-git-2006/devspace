@@ -84,7 +84,6 @@ function NavBar({selectedTool, onAnimatedChange, animated} :
             key={'tool-l-' + i}
             onClick={() => {
               // nav(e.url)
-              alert('Going to ...')
               nav(e.url)
               // onToolSelected(e.name)
             }}
