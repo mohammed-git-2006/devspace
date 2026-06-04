@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useEffect, useState } from "react";
 import PanelWrapper from "./components/PanelWrapper";
 import BuyMeCoffe from "./components/BuyMeCoffee";
@@ -7,6 +7,7 @@ import StoryPanel from "./components/StoryPanel";
 import PixelBlast from "../bits/PixelBlast";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import tools from './tools/identifier.tsx'
+import {Analytics} from '@vercel/analytics/react'
 
 const shortcuts = {
   'jd' : 'JWT Decoder',
@@ -158,6 +159,21 @@ export default function HomePage()
   const [bgAnimated, setBGAnimated] = useState(true)
   const nav = useNavigate()
 
+  
+  const [ratePanel, setRatePanel] = useState(false)
+  const ratePanelController = useAnimation()
+  const variants = {
+    hidden: {
+      opacity: 0,
+      x: '-50vw',
+    },
+
+    enter: {
+      opacity: 1,
+      x: '0vw'
+    }
+  }
+
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
       const key = e.key.toLowerCase()
@@ -182,11 +198,52 @@ export default function HomePage()
 
       })      
     })
+
+    ratePanelController.start('hidden')
   }, [])
+
 
   return (
     <>
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-">
+    {/* <motion.div 
+    variants={variants}
+    initial='hidden'
+    animate={ratePanelController}
+    className="backdrop-blur-lg fixed p-3 w-40 h-30 bottom-10 left-30 border border-white/5
+    rounded-lg bg-gradient-to-br form-black via-white/5 to-white/10 z-1000 flex flex-col">
+      <script src="https://giscus.app/client.js"
+        data-repo="mohammed-git-2006/"
+        data-repo-id="[ENTER REPO ID HERE]"
+        data-category="[ENTER CATEGORY NAME HERE]"
+        data-category-id="[ENTER CATEGORY ID HERE]"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        // crossorigin="anonymous"
+        async>
+      </script>
+    </motion.div>
+    <motion.div className="backdrop-bluer-lg p-3 bg-[var(--accent)] td fixed bottom-10 left-10 z-999 border border-white/25 rounded-full cursor-pointer
+    transition hover:scale-105 flex flex-row gap-2 text-sm animate-bounce"
+    onClick={() => {
+      setRatePanel(prev => {
+        ratePanelController.start(prev ? 'hidden' : 'enter')
+        return !prev;
+      })
+    }}
+    >
+      
+      Rate your experience!
+    </motion.div>
+     */}
+    
+    <Analytics/>
+    
+    <div className="fixed top-0 left-0 w-full h-full pointer-events- ">
       { bgAnimated ? <PixelBlast
     variant="square"
     pixelSize={4}
@@ -210,7 +267,7 @@ export default function HomePage()
 
       </div> }
     </div>
-    <div className="w-full h-dvh flex flex-col p-0 m-0 z-999">
+    <div className="w-full h-dvh flex flex-col p-0 m-0 z-999 ">
       <NavBar onToolSelected={(t) => {
         setTool(t)
       }} selectedTool={tool} onAnimatedChange={(v) => {
@@ -219,9 +276,9 @@ export default function HomePage()
 
       <div className="w-full flex-1 flex p-5 flex-col gap-5 items-center">
         <div className="grid grid-cols-2 gap-3 w-full">
-            <BuyMeCoffe />
-            <StoryPanel/>
-          </div>
+          <BuyMeCoffe />
+          <StoryPanel/>
+        </div>
         {tool == 'none' && <>
           
 
@@ -234,7 +291,12 @@ export default function HomePage()
 
         <Outlet />
 
+        <div className="h-20">
+
       </div>
+      </div>
+
+      
     </div>
     {/* <Footer/> */}
     </>
