@@ -277,7 +277,17 @@ export default function HomePage()
       <div className="w-full flex-1 flex p-5 flex-col gap-5 items-center">
         <div className="grid grid-cols-2 gap-3 w-full">
           <BuyMeCoffe />
-          <StoryPanel/>
+          <PanelWrapper hMax>
+            <amp-ad width="100vw" height="320"
+              type="adsense"
+              data-ad-client="ca-pub-4980834571806250"
+              data-ad-slot="1321156841"
+              data-auto-format="rspv"
+              data-full-width="">
+              <div overflow=""></div>
+            </amp-ad>
+          </PanelWrapper>
+          {/* <StoryPanel/> */}
         </div>
         {tool == 'none' && <>
           
