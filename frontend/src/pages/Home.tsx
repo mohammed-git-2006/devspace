@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PanelWrapper from "./components/PanelWrapper";
 import BuyMeCoffe from "./components/BuyMeCoffee";
 import TextType from "../bits/TextType";
-import StoryPanel from "./components/StoryPanel";
+// import StoryPanel from "./components/StoryPanel";
 import PixelBlast from "../bits/PixelBlast";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import tools from './tools/identifier.tsx'
@@ -278,14 +278,14 @@ export default function HomePage()
         <div className="grid grid-cols-2 gap-3 w-full">
           <BuyMeCoffe />
           <PanelWrapper hMax>
-            <amp-ad width="100vw" height="320"
-              type="adsense"
-              data-ad-client="ca-pub-4980834571806250"
-              data-ad-slot="1321156841"
-              data-auto-format="rspv"
-              data-full-width="">
-              <div overflow=""></div>
-            </amp-ad>
+            <ins className="block adsbygoogle"
+                data-ad-client="ca-pub-4980834571806250"
+                data-ad-slot="1321156841"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({})
+            </script>
           </PanelWrapper>
           {/* <StoryPanel/> */}
         </div>
