@@ -13,7 +13,7 @@ const shortcuts = {
   'jm' : 'JSON Minify',
   'jp' : 'JSON Prettify',
   'jy' : 'JSON/YAML Converter',
-  'hg' : 'Hash Generator (MD5/SHA256)',
+  'hg' : 'Hash Generator (MD5/SHA256/...)',
   'bs' : 'Base64 Encode/Decode',
   'rt' : 'Regex Tester',
   'ue' : 'URL Encoder/Decoder',
