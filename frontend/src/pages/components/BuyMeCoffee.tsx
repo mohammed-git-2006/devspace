@@ -1,5 +1,4 @@
 import PanelWrapper from "./PanelWrapper";
-import ButtonImage from '../../bmc.png'
 
 export default function BuyMeCoffe()
 {
