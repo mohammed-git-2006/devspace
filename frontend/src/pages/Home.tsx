@@ -60,6 +60,7 @@ function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} :
   useEffect(() => {
     if (selectedTool == 'none')
       onToolSelected((tools.find(t => t.url == location.pathname)??{name:'none'}).name)
+
   }, [])
 
   return (
@@ -205,7 +206,7 @@ export default function HomePage()
     edgeFade={0.25}
     transparent
   /> : 
-      <div className="bg-black/60 ">
+      <div className="bg-gradient-to-tr  from-black via-indigo-900 to-[var(--second)]  w-full h-dvh ">
 
       </div> }
     </div>
@@ -232,25 +233,6 @@ export default function HomePage()
         </>}
 
         <Outlet />
-
-        {/* {tool != 'none' && <>
-          <PanelWrapper wMax>
-            {tool == 'JSON Prettify' && <JSONPrettify/> }
-            {tool == 'JSON Minify' && <JSONMinify/> }
-            {tool == 'JWT Decoder' && <JWT/> }
-            {tool == 'JSON/YAML Converter' && <JsonToYaml/> }
-            {tool == 'Hash Generator (MD5/SHA256)' && <HashPage/>}
-            {tool == 'Base64 Encode/Decode' && <Base64/>}
-            {tool == 'Regex Tester' && <RegexTester/>}
-            {tool == 'URL Encoder/Decoder' && <URL/>}
-            {tool == 'Text Case Converter' && <TextCaseConverter/>}
-            {tool == 'Word Counter' && <WordCounter/>}
-            {tool == 'HTTP' && <HTTPTester/>}
-            {tool == 'Color Utils' && <ColorUtils/> }
-            {tool == 'Diff Checker' && <DiffChecker/> }
-            
-          </PanelWrapper>
-        </>} */}
 
       </div>
     </div>

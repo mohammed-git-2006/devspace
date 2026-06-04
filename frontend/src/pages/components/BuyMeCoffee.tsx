@@ -21,9 +21,11 @@ export default function BuyMeCoffe()
 
       </button> */}
 
-      <a href="https://ko-fi.com/devspace" 
-      className="animate-bounce" 
-      target="_blank" rel="noopener noreferrer"><img src={ButtonImage} className="w bg-transparent h-[40px] w-min"/> </a>
+      <div>
+        <a href="https://ko-fi.com/devspace"
+        className="animate-bounce"
+        target="_blank" rel="noopener noreferrer"><img src={ButtonImage} className="bg-transparent h-10 w-min"/> </a>
+      </div>
 
     </div>
   </PanelWrapper>

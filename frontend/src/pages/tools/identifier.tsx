@@ -24,7 +24,7 @@ const tools = [
     description: 'Convert JSON to YAML and back seamlessly. Ideal for configuration files, APIs, and DevOps workflows.' 
   },
   { 
-    name: 'Hash Generator (MD5/SHA256)', 
+    name: 'Hash Generator (MD5/SHA256/...)', 
     url: '/tools/hash', 
     title: 'Hash Generator | DevSpace 🔒', 
     description: 'Generate secure MD5 and SHA256 hashes instantly. Useful for password hashing, file integrity checks, and cryptography.' 
