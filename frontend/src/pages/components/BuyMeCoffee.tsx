@@ -21,11 +21,13 @@ export default function BuyMeCoffe()
 
       </button> */}
 
-      <div>
+      {/* <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#9D4EDD', 'X2G520MG1Q');kofiwidget2.draw();</script>  */}
+<a href='https://ko-fi.com/X2G520MG1Q' target='_blank'><img  className="border-0 h-10" src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' alt='Buy Me a Coffee at ko-fi.com' /></a>
+      {/* <div>
         <a href="https://ko-fi.com/devspace"
         className="animate-bounce"
         target="_blank" rel="noopener noreferrer"><img src={ButtonImage} className="bg-transparent h-10 w-min"/> </a>
-      </div>
+      </div> */}
 
     </div>
   </PanelWrapper>
