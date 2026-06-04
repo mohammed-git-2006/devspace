@@ -200,6 +200,12 @@ export default function HomePage()
     })
 
     ratePanelController.start('hidden')
+
+    try {
+      ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
+    } catch (e) {
+      console.error("Adsense error", e);
+    }
   }, [])
 
 
@@ -283,9 +289,6 @@ export default function HomePage()
                 data-ad-slot="1321156841"
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({})
-            </script>
           </PanelWrapper>
           {/* <StoryPanel/> */}
         </div>
