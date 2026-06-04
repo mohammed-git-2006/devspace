@@ -160,19 +160,19 @@ export default function HomePage()
   const nav = useNavigate()
 
   
-  const [ratePanel, setRatePanel] = useState(false)
+  // const [ratePanel, setRatePanel] = useState(false)
   const ratePanelController = useAnimation()
-  const variants = {
-    hidden: {
-      opacity: 0,
-      x: '-50vw',
-    },
+  // const variants = {
+  //   hidden: {
+  //     opacity: 0,
+  //     x: '-50vw',
+  //   },
 
-    enter: {
-      opacity: 1,
-      x: '0vw'
-    }
-  }
+  //   enter: {
+  //     opacity: 1,
+  //     x: '0vw'
+  //   }
+  // }
 
   useEffect(() => {
     window.addEventListener('keydown', (e) => {
@@ -242,7 +242,7 @@ export default function HomePage()
      */}
     
     <Analytics/>
-    
+
     <div className="fixed top-0 left-0 w-full h-full pointer-events- ">
       { bgAnimated ? <PixelBlast
     variant="square"
