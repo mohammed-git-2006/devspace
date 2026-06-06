@@ -4,10 +4,11 @@ import PanelWrapper from "./components/PanelWrapper";
 import BuyMeCoffe from "./components/BuyMeCoffee";
 import TextType from "../bits/TextType";
 // import StoryPanel from "./components/StoryPanel";
-import PixelBlast from "../bits/PixelBlast";
+// import PixelBlast from "../bits/PixelBlast";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import tools from './tools/identifier.tsx'
 import {Analytics} from '@vercel/analytics/react'
+import AnimatedBackground from "./components/AnimatedBackground.tsx";
 
 const shortcuts = {
   'jd' : 'JWT Decoder',
@@ -250,28 +251,8 @@ export default function HomePage()
     <Analytics/>
 
     <div className="fixed top-0 left-0 w-full h-full pointer-events- ">
-      { bgAnimated ? <PixelBlast
-    variant="square"
-    pixelSize={4}
-    color="#9D4EDD"
-    patternScale={2}
-    patternDensity={1}
-    pixelSizeJitter={0}
-    enableRipples
-    rippleSpeed={0.4}
-    rippleThickness={0.12}
-    rippleIntensityScale={1.5}
-    liquid={false}
-    liquidStrength={0.12}
-    liquidRadius={1.2}
-    liquidWobbleSpeed={5}
-    speed={0.5}
-    edgeFade={0.25}
-    transparent
-  /> : 
-      <div className="bg-gradient-to-tr  from-black via-indigo-900 to-[var(--second)]  w-full h-dvh ">
-
-      </div> }
+      { bgAnimated ? <AnimatedBackground /> : 
+      <div className="bg-gradient-to-tr  from-black via-[var(--accent)] to-[var(--second)]  w-full h-dvh "></div> }
     </div>
     <div className="w-full h-dvh flex flex-col p-0 m-0 z-999 ">
       <NavBar onToolSelected={(t) => {
@@ -290,7 +271,6 @@ export default function HomePage()
                 data-ad-format="auto"
                 data-full-width-responsive="true"></ins>
           </PanelWrapper>
-          {/* <StoryPanel/> */}
         </div>
         {tool == 'none' && <>
           
@@ -311,7 +291,6 @@ export default function HomePage()
 
       
     </div>
-    {/* <Footer/> */}
     </>
   )
 }

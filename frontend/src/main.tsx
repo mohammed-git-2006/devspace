@@ -23,6 +23,7 @@ const ColorUtils = lazy(() => import('./pages/tools/ColorUtils.tsx'))
 const DiffChecker = lazy(() => import('./pages/tools/DiffChecker.tsx'))
 const JsonToYaml = lazy(() => import('./pages/tools/JSONtoYAML.tsx'))
 import tools from './pages/tools/identifier.tsx'
+import PageNotFound from './pages/tools/404.tsx'
 
 function ToolPage({children} : {children:React.ReactNode}) 
 {
@@ -59,7 +60,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="tools/color-utils"   element={<ToolPage><ColorUtils /></ToolPage>} />
           <Route path="tools/diff-checker"  element={<ToolPage><DiffChecker /></ToolPage>} />
         </Route>
-        <Route path='*' element={<Navigate to={'/'} replace/>}/>
+        <Route path='*' element={<PageNotFound/>} />
+        {/* <Route path='*' element={<Navigate to={'/'} replace/>}/> */}
       </Routes>
     </BrowserRouter>
   </MotionConfig>,
