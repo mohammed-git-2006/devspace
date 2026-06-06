@@ -62,13 +62,12 @@ function NavBar({onToolSelected, selectedTool, onAnimatedChange, animated} :
   useEffect(() => {
     if (selectedTool == 'none')
       onToolSelected((tools.find(t => t.url == location.pathname)??{name:'none'}).name)
-
   }, [])
 
   return (
     <div 
     className="px-4 py-2.5 flex flex-row gap-3 gap-x-4 items-center mx-4 mt-4 backdrop-blur-2xl
-      rounded-xl bg-gradient-to-r from-white/10 to-white/5 border border-white/15 shadow-lg sticky top-4 left-0 z-[1500]
+      rounded-xl bg-linear-to-r from-white/10 to-white/5 border border-white/15 shadow-lg sticky top-4 left-0 z-[1500]
       "
     >
 
